@@ -23,6 +23,11 @@ def test_form1():
 def test_form2():
     pass
 
+@pytest.mark.django_db
+@scenario('../features/calculate_season.feature', 'Third form')
+def test_form3():
+    pass
+
 
 # browser fixture comes from pytest-splinter
 # live_server fixture comes from pytest-django
@@ -87,4 +92,7 @@ def select_the_seasonset(browser, calendar):
 def see_text(browser, expected):
     el = browser.find_by_css('#result').first
     assert el.text == expected
+
+
+# @then()
 

@@ -33,6 +33,14 @@ class TestLocation:
         loc = location.Location(lat, lng)
         assert loc.country == 'Russian Federation'
 
+    @pytest.mark.asia
+    @pytest.mark.external
+    def test_country_india(self):
+        lat, lng = places['mumbai']
+        loc = location.Location(lat, lng)
+        assert loc.country == 'India'
+
+    @pytest.mark.americas
     @pytest.mark.external
     def test_country_argentina(self):
         lat, lng = places['buenos aires']
@@ -59,13 +67,15 @@ class TestLocation:
     def test_hemisphere_melbourne(self):
         lat, lng = places['melbourne']
         loc = location.Location(lat, lng)
-        assert loc.hemisphere == 'northern'
+        assert loc.hemisphere == 'southern'
 
 
 
     @pytest.mark.parametrize(('placename', 'expected'), [
         ('london', 'northern'),
         ('murmansk', 'northern'),
+        ('delhi', 'northern'),
+        ('mumbai', 'northern'),
         ('buenos aires', 'southern'),
         ('pontianak', 'southern'),
     ])
@@ -85,5 +95,5 @@ class TestLocation:
         lng = '144°E'
         loc = location.Location(lat, lng)
         with pytest.raises(TypeError):
-            _hemisphere = loc.hemisphere
+            hemisphere = loc.hemisphere
         

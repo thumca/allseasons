@@ -23,4 +23,18 @@ Scenario: Second form
         lng: 144.95
     When I select the calendar "southern astronomical"
     And I submit the form
-    Then I should see "The event of 19 March test, which occurred on 2017-03-19 at -37.8,144.95, according to the southern astronomical calendar fell during the season of summer!" 
+    Then I should see "The event of 19 March test, which occurred on 2017-03-19 at -37.8,144.95, according to the southern astronomical calendar fell during the season of summer!"
+
+
+Scenario: Third form
+    Given I have submitted the first form as follows:
+        name: 19 March test
+        day: 19
+        month: 3
+        year: 2017
+        lat: 19.0760
+        lng: 72.8777
+    When I select the calendar "Hindu"
+    And I submit the form
+    Then I should see "The event of 19 March test, which occurred on 2017-03-19 at 19.0760,72.8777, according to the Hindu calendar fell during the season of Vasanta!"
+    And I email the form

@@ -14,13 +14,14 @@ def test_get_address_from_latlng_success(caplog):
     assert 'get_address_from_latlng: successfully looked up 1 latlng' in caplog.text
 
 
-def test_get_address_from_latlng_failure(osm_is_down):
+def test_get_address_from_latlng_failure(osm_is_down, caplog):
     """Simulate where the OpenStreetMap server is down and we get
     a ReadTimeout. osm_is_down is a pytest fixture, defined in conftest.py
     """
     lat, lng = (-37.813628, 144.963058)
     result = external_services.get_address_from_latlng(lat, lng)
     assert result.country == False
+    assert 'get_address_from_latlng got a RequestException' in caplog.text
 
 
 def test_send_mail_safely_success(mailserver_is_good):
